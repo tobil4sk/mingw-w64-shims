@@ -38,6 +38,8 @@ depopts: [
   "conf-pkg-config"
 ]
 setenv: [
+  [ PATH += "%{_:bin-x86_64}%" ]
   [ PATH += "%{_:runtime-x86_64}%" ]
+  [ PATH += "%{_:bin-i686}%" ]
   [ PATH += "%{_:runtime-i686}%" ]
 ]

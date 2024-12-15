@@ -42,6 +42,8 @@ for atom in $*; do
           exit 2;;
       esac
       sysroot_bin="$("$gcc" -print-sysroot)\\mingw\\bin"
+      eval "bin_$arch=\
+\"\$(cygpath -w \"/usr/\$arch-w64-mingw32/bin\" | sed -e '$opam_escape')\""
       eval "sysroot_$arch=\
 \"\$(cygpath -w \"\$sysroot_bin\" | sed -e '$opam_escape')\""
     else
@@ -59,7 +61,9 @@ fi
 cat > "$package.config" <<EOF
 opam-version: "2.0"
 variables {
+  bin-x86_64: "$bin_x86_64"
   runtime-x86_64: "$sysroot_x86_64"
+  bin-i686: "$bin_i686"
   runtime-i686: "$sysroot_i686"
 }
 EOF
